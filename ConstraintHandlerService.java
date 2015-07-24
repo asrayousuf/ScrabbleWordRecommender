@@ -19,7 +19,7 @@ public class ConstraintHandlerService {
 		String pattern= regexPattern(constraintPattern);
 		
 		for(String word: possibleWords){
-			if(isMatching(word, pattern) {
+			if(isMatching(word, pattern)) {
 				patternMatchedWords.add(word);
 			}
 		}
