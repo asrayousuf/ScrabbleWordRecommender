@@ -17,10 +17,10 @@ class BlankHandling {
 		rackWithoutBlanks = "";
 	}
 	
-	public HashMap<Integer , String> rankWordScores(Map<String, String> possibleWordsMap){
+	public HashMap<Integer , String> rankWordScores(HashMap<String, String> possibleWordsMap){
 		
 		HashMap<Integer, String> scoreMap = new HashMap<Integer, String>();
-		Iterator <Map.Entry<String, String>> possibleWordsIterator = possibleWordsMap.entrySet().iterator();
+		Iterator <HashMap.Entry<String, String>> possibleWordsIterator = possibleWordsMap.entrySet().iterator();
 		String currentEntryValue = "";
 		char[] currentKey;
 		char[] rack = rackWithoutBlanks.toCharArray();
