@@ -2,24 +2,24 @@ package ScrabbleTeam3;
 
 	class Word implements Comparable<Word>
 	{
-		String value;
-		int key;
+		String scoredWord;
+		int score;
 		int length;
 		
 		public Word(String value, int key)
 		{
-			this.value = value;
-			this.key = key;
+			this.scoredWord = value;
+			this.score = key;
 			this.length = value.length();
 		}
 		@Override
 		public int compareTo(Word o)
 		{
-			if(this.key == o.key)
+			if(this.score == o.score)
 			{
-				return (this.value.compareTo(o.value));
+				return (this.scoredWord.compareTo(o.scoredWord));
 			}
-			return o.key-this.key;
+			return o.score-this.score;
 		}
 	}
 
