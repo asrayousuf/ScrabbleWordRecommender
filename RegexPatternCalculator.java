@@ -27,15 +27,15 @@ public class RegexPatternCalculator
 	    		  i++;
 	    	  }
 	    	  for(int j=0; j<firstChar; j++)
-	    		  regex.append('?');
+	    		  regex.append("(?)");
 	    	  for(int j=firstChar; j<=lastChar; j++)
 	    	  {
 	    		  if(constraint.charAt(j) != '*')
 	    		  regex.append(constraint.charAt(j));
-	    		  else regex.append('.');
+	    		  else regex.append("(.)");
 	    	  }
 	    	  for(int j=lastChar+1; j<constraint.length(); j++)
-	    		  regex.append('?');
+	    		  regex.append("(?)");
 	    	  
 	    	  /*while(constraint.charAt(i) == '*')
 	    	  {
@@ -59,18 +59,26 @@ public class RegexPatternCalculator
 	      String pattern = regex.toString();
 	      System.out.println(regex);
           return regex.toString();
-	      /*Pattern r = Pattern.compile(pattern);
-	      Matcher m = r.matcher("aaacap");
 	      
-	      if (m.find( )) {
+	   }
+	 
+	 static boolean isMatching(String word, String regex)
+	 {
+		 Pattern pattern = Pattern.compile(regex);
+	      Matcher matcher = pattern.matcher(word);
+	      
+	      return (matcher.find( ));
+	      /*{
 	         System.out.println(m.group());
 	      } else {
 	         System.out.println("NO MATCH");
 	      }*/
-	   }
+	 }
 	 public static void main(String args[])
 	 {
 		 RegexPatternCalculator cobj = new RegexPatternCalculator();
-		System.out.println(cobj.convertToRegex("***c**p*a*"));
+		String regex = (cobj.convertToRegex("***c**p*a*"));
+		System.out.println(regex);
+		System.out.println(isMatching("acaapia", regex));
 	 }
 }
