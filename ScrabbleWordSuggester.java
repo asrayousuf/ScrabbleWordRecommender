@@ -16,19 +16,16 @@ import java.util.*;
 	
 	private HashMap<String, String> dictionary;
 	private BlankHandling blankHandler;
+	private ConstraintHandlerService constraintHandler;
 	
-	ScrabbleWordSuggester(String rack) {
+	ScrabbleWordSuggester() {
 		dictionary = new HashMap<String, String>();
-		blankHandler = new BlankHandling();
 		buildDictionary();
 	}
 
 	public static void main(String args[]) throws IOException {
 		ScrabbleWordSuggester scrabbleWordSuggester = new ScrabbleWordSuggester();
-
-		scrabbleWordSuggester.requestUserInput();
-
-		
+		scrabbleWordSuggester.requestUserInput();		
 	}
 
 	private void requestUserInput() {
@@ -47,17 +44,23 @@ import java.util.*;
 			System.out.println("Enter number of suggested words to be returned: ");
 			int required_suggestions = scanner.nextInt();
 			if ( constraint.length() > 0 ) {
-				rack = ConstraintHandlerService.appendConstraintLetters(constraint, rack);
+				constraintHandler = new ConstraintHandlerService(rack);
+				rack = constraintHandler.appendConstraintLetters(constraint);
 			}
-			if ( rack.hasBlankTiles() ) {
-				rack = blankHandler.getRackWithoutBlankTiles();
+			blankHandler = new BlankHandler(rack);
+			if ( blankHandler.hasBlankTiles() ) {
 				blankTiles = blankHandler.countBlankTiles();
+				rack = blankHandler.getRackWithoutBlankTiles();
 			}
+
 			HashMap<String, String> possibleWords = findPossibleWords(rack, blankTiles);
 
 			if ( constraint.length > 0 ) {
-				
+				possibleWords = constraintHandler.applyPatternMatching(possibleWords)
 			}
+
+			//TO-DO - To compute final scores of the resultant words from Blank handler if blank spaces were present and print  
+
 
 			System.out.println("Do you wish to search for another word? (y/n) ");
 			boolean nextSequence = false;
