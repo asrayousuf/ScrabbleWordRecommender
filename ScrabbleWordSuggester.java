@@ -36,10 +36,10 @@ import java.util.*;
 					System.out.println("Enter your constraint");
 					constraint=scanner.nextLine();
 				}
-		
+
 		System.out.println("Enter number of suggested words to be returned");
 		int NUMBER_OF_SUGGESTIONS_NEEDED=scanner.nextInt();
-		
+
 		printSuggestions(findPossibleWords(dictionary, rack));
 	}
 
@@ -52,7 +52,7 @@ import java.util.*;
 				sortedWord = getWordSortedByCharacter(nextWord);
 				addtoDictionary(sortedWord, nextWord);
 			}
-		} 
+		}
 		catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -63,11 +63,11 @@ import java.util.*;
 		Arrays.sort(chars);
 		return new String(chars);
 	}
-	
+
 	private void addtoDictionary(String sortedWord, String currentWord) {
 		if ( dictionary.containsKey(sortedWord) ) {
 			dictionary.put(sortedWord, dictionary.get(sortedWord) + " " + currentWord);
-		} 
+		}
 		else {
 			int score = calculateScore(sortedWord);
 			dictionary.put(sortedWord, score + " " + currentWord);
@@ -84,5 +84,36 @@ import java.util.*;
 
 	void sortDictionaryDescendingly() {
 		Collections.sort(dictionary);
+	}
+
+	ArrayList<String> findPossibleWords(String rack, int numOfBlanks) {
+		Map<String, String> dictionary = new Map<String, String>();
+		ArrayList<String> listOfPossibleWords = new ArrayList<String>();
+		for (Map.Entry<String, String> entry : dictionary.entrySet()) {
+			String sortedWord = entry.getKey();
+			String listOfWordsWithScore = entry.getValue();
+			if (ifWordMatches(sortedWord, rack, numOfBlanks)) {
+				addWordsToList(listOfPossibleWords, listOfWordsWithScore);
+			}
+		}
+		return listOfPossibleWords;
+	}
+
+	void addWordsToList(ArrayList<String> listOfPossibleWords, String listOfWordsWithScore) {
+		String words[] = listOfWordsWithScore.split(" ");
+		for (int i = 0; i < words.length; i++) {
+			listOfPossibleWords.add(words[i]);
+		}
+	}
+
+	boolean ifWordMatches(String word, String rack, int numOfBlanks) {
+		List<Character> characterListofWord = new LinkedList<Character>();
+		for (char c : word.toCharArray()) {
+			characterListofWord.add(c);
+		}
+		for (char c : rack.toCharArray()) {
+			characterListofWord.remove(new Character(c));
+		}
+		return (characterListofWord.size() == numOfBlanks);
 	}
 }
