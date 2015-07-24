@@ -26,7 +26,11 @@ public class ScrabbleWordSuggestorTest {
 	public void ifWordMatchesTestWithBlanks(){
 		assertTrue(ScrabbleWordSuggester.ifWordMatches("HOUR","OUR ",0));
 	}
-	
+	@Test
+	public void getWordSortedByCharacterTest() throws IOException {
+		ScrabbleWordSuggester scrabbleWordSuggester = new ScrabbleWordSuggester("cat");
+		assertEquals("Should return abcd", "abcd", scrabbleWordSuggester.getWordSortedByCharacter("bcad"));
+	}
 	@Test
 	public void testGetSortedList() throws IOException {
 		ScrabbleWordSuggester scrabbleWordSuggester = new ScrabbleWordSuggester("cat");
