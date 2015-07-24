@@ -9,7 +9,7 @@ class BlankHandling {
 
 	public Set<String> addBlankHelper(String word, int spaceCount){
 	
-		Set<String> formedWordsList = new HashSet<String>();
+		Set<String> formedWordsList = new TreeSet<String>();
 		return addBlank(formedWordsList, word, spaceCount);
 	
 	}
