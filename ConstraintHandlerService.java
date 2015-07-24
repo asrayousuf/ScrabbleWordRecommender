@@ -22,13 +22,11 @@ public class ConstraintHandlerService {
 	}
 
 	private static List<Word> applyPatternMatching(List<Word> possibleWords, String constraintPattern) {
-
-		char[] constraintPatternArray = constraintPattern.toCharArray();
 		List<Word> patternMatchedWords = new ArrayList<Word> ();
-		String pattern= regexPattern(constraintPattern);
+		String pattern= ConstraintToRegexConvert.convertToRegex(constraintPattern);
 		
 		for(Word wordToMatch: possibleWords){
-			if(isMatching(wordToMatch.getWord(), pattern) {
+			if(ConstraintToRegexConverter.isMatching(wordToMatch.getWord(), pattern) {
 				patternMatchedWords.add(new Word(wordToMatch.getWord(), wordToMatch.getScore()));
 			}
 		}
