@@ -6,8 +6,12 @@ import java.util.List;
 public class ConstraintHandlerService {
 	private final String BLANK_TILE = "*";
 	private final String EMPTY_STRING = "";
-
-	public String appendConstraintLetters(String constraintPattern, String tiles) {
+	String tiles;
+	public ConstraintHandlerService(String tiles) {
+		this.tiles=tiles;
+	}
+	
+	public String appendConstraintLetters(String constraintPattern) {
 		String lettersInConstraint = extractLetters(constraintPattern);
 		return tiles + lettersInConstraint;
 	}
