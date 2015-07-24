@@ -6,20 +6,26 @@ import java.util.List;
 public class ConstraintHandlerService {
 	private final String BLANK_TILE = "*";
 	private final String EMPTY_STRING = "";
-
-	public String appendConstraintLetters(String constraintPattern, String tiles) {
+	
+	private String tiles;
+	
+	public ConstraintHandlerService(String tiles) {
+		this.tiles=tiles;
+	}
+	
+	public String appendConstraintLetters(String constraintPattern) {
 		String lettersInConstraint = extractLetters(constraintPattern);
 		return tiles + lettersInConstraint;
 	}
 
 
-	private static List<Word> applyPatternMatching(List<Word> possibleWords, String constraintPattern) {
-		List<Word> patternMatchedWords = new ArrayList<Word> ();
+	private List<String> applyPatternMatching(List<String> possibleWords, String constraintPattern) {
+		List<String> patternMatchedWords = new ArrayList<String> ();
 		String pattern= ConstraintToRegexConvert.convertToRegex(constraintPattern);
 		
-		for(Word wordToMatch: possibleWords){
-			if(ConstraintToRegexConverter.isMatching(wordToMatch.getWord(), pattern) {
-				patternMatchedWords.add(new Word(wordToMatch.getWord(), wordToMatch.getScore()));
+		for(String wordToMatch: possibleWords){
+			if(ConstraintToRegexConverter.isMatching(wordToMatch, pattern)) {
+				patternMatchedWords.add(wordToMatch);
 			}
 		}
 		return patternMatchedWords;
@@ -35,9 +41,5 @@ public class ConstraintHandlerService {
 		}
 
 		return lettersInConstraint;
-	}
-
-	private boolean hasBlankTiles(String tiles) {
-		return tiles.contains(BLANK_TILE);
 	}
 }

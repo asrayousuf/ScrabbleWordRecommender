@@ -11,15 +11,16 @@ class BlankHandling {
 	private static final String BLANK_TILE = "*";
 	private String rackWithoutBlanks;
 	static final int SCORE_OF_LETTERS[] = {1, 3, 3, 2, 1, 4, 2, 4, 1, 8, 5, 1, 3, 1, 1, 3, 10, 1, 1, 1, 1, 4, 4, 8, 4, 10};
+	static final int A_ASCII = 97;
 	
 	public BlankHandling() {
 		rackWithoutBlanks = "";
 	}
 	
-	public HashMap<Integer , String> rankWordScores(){
+	public HashMap<Integer , String> rankWordScores(HashMap<String, String> possibleWordsMap){
 		
 		HashMap<Integer, String> scoreMap = new HashMap<Integer, String>();
-		Iterator <Map.Entry<String, String>> possibleWordsIterator = possibleWordsMap.entrySet();
+		Iterator <HashMap.Entry<String, String>> possibleWordsIterator = possibleWordsMap.entrySet().iterator();
 		String currentEntryValue = "";
 		char[] currentKey;
 		char[] rack = rackWithoutBlanks.toCharArray();
@@ -29,8 +30,7 @@ class BlankHandling {
 		while( possibleWordsIterator.hasNext() ){
 			Map.Entry<String, String> possibleWordEntry = possibleWordsIterator.next();
 			currentEntryValue = possibleWordEntry.getValue();
-			score = Integer.parseInt( (holderString.split(" ")[0] );
-			currentEntryKey = possibleWordEntry.getKey();
+			score = Integer.parseInt(currentEntryValue.split(" ")[0]) ;
 			currentKey = (possibleWordEntry.getKey()).toCharArray();
 			
 			for( char letter :  rack){
@@ -55,7 +55,7 @@ class BlankHandling {
 	}
 	
 	private String sortRack(String rack) {
-        	char[] character_in_rack = rack.toCharArray();
+        	char[] characters_in_rack = rack.toCharArray();
         	Arrays.sort(characters_in_rack);
         	return new String(characters_in_rack);
 	}
@@ -71,7 +71,7 @@ class BlankHandling {
 	
 	private String getRackWithoutBlankTiles(String rack_with_blanks) {
 		rackWithoutBlanks = rack_with_blanks.replace(BLANK_TILE, "");
-		rackwithoutBlanks = sortRack(rackWithoutBlanks);
+		rackWithoutBlanks = sortRack(rackWithoutBlanks);
 		return rackWithoutBlanks;
 	}
 }
