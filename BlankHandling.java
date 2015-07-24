@@ -10,7 +10,6 @@ class BlankHandling {
 	
 	private static final String BLANK_TILE = "*";
 	private String rackWithoutBlanks;
-	
 	static final int SCORE_OF_LETTERS[] = {1, 3, 3, 2, 1, 4, 2, 4, 1, 8, 5, 1, 3, 1, 1, 3, 10, 1, 1, 1, 1, 4, 4, 8, 4, 10};
 	
 	public BlankHandling() {
