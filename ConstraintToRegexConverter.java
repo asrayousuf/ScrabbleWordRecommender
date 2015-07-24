@@ -1,5 +1,3 @@
-package ScrabbleTeam3;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -26,9 +24,9 @@ public class ConstraintToRegexConverter
 	    		}
 	    		i++;
 	      }
-	      for (int j = 0; j < firstChar; j++)
+	      if (firstChar != 0)
 	      {
-	    		regex.append("(?)");
+	    	  regex.append("(.*)");
 	      }
 	      for (int j = firstChar; j <= lastChar; j++)
 	      {
@@ -41,14 +39,14 @@ public class ConstraintToRegexConverter
 	    			regex.append("(.)");
 	    		}
 	      }
-	      for (int j = lastChar+1; j < constraint.length(); j++)
+	      if (lastChar != constraint.length() - 1)
 	      {
-	    		regex.append("(?)");
+	    		regex.append("(.*)");
 	      }  
 	      return regex.toString();
 	   }
 	 
-	 public static boolean isMatching(String word, String regex)
+	 static boolean isMatching(String word, String regex)
 	 {
 		  Pattern pattern = Pattern.compile(regex);
 	      Matcher matcher = pattern.matcher(word);
@@ -59,8 +57,8 @@ public class ConstraintToRegexConverter
 	 public static void main(String args[])
 	 {
 		ConstraintToRegexConverter cobj = new ConstraintToRegexConverter();
-		String regex = (cobj.convertToRegex("***c**p*a*"));
+		String regex = (cobj.convertToRegex("**c**p*a*"));
 		System.out.println(regex);
-		System.out.println(isMatching("acaapia", regex));
+		System.out.println(isMatching("iceapxa", regex));
 	 }
 }
