@@ -14,7 +14,7 @@ public class ConstraintToRegexConverter
 	      {
 	    		i++;
 	      }
-	      int firstChar = i++;
+	      int firstChar = i;
 	      int lastChar = 0;
 	      while (i != constraint.length())
 	      {
