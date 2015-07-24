@@ -6,15 +6,22 @@ import java.util.List;
 import java.util.ArrayList;
 
 class BlankHandling {
+	
+	private static final String BLANK_VALUE = "*";
+	private String rackWithoutBlanks;
+	
+	public BlankHandling() {
+		rackWithoutBlanks = "";
+	}
 
-	public Set<String> addBlankHelper(String word, int spaceCount){
+	private Set<String> addBlankHelper(String word, int spaceCount){
 	
 		Set<String> formedWordsList = new TreeSet<String>();
 		return addBlank(formedWordsList, word, spaceCount);
 	
 	}
 	
-	public static Set<String> addBlank(Set<String> formedWordsList, String word, int spaceCount){
+	private Set<String> addBlank(Set<String> formedWordsList, String word, int spaceCount){
 		
 		if(spaceCount == 0){
 			formedWordsList.add(word);
@@ -37,14 +44,9 @@ class BlankHandling {
 		return formedWordsList;
 	}
 	
-	public static void main(String[] args) {
-	
-		String word = "cnt";
-		int spaceCount = 2;
-		
-		BlankHandling blankHandling = new BlankHandling();
-		System.out.println(blankHandling.addBlankHelper(word, spaceCount));
-		
+	public int getNumberOfBlanks(String rack_with_blanks) {
+		rackWithoutBlanks = rack_with_blanks.replace(BLANK_VALUE, "");
+		int blankCount = rack_with_blanks.length() - rackWithoutBlanks.length();
+		return blankCount;		
 	}
-
 }
