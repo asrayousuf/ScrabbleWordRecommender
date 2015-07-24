@@ -11,11 +11,12 @@ import java.util.*;
 	public class ScrabbleWordSuggester
 {
 	static final int SCORE_OF_LETTERS[] = {1,3,3,2,1,4,2,4,1,8,5,1,3,1,1,3,10,1,1,1,1,4,4,8,4,10};
+	static final char CHARACTER_A = 'A';
 	static final String FILE_PATH = "C:\\Users\\test\\workspace\\BootCamp\\src\\ScrabbleTeam3\\sowpods.txt";
-	static ArrayList<Word> dictionary;
+	static HashMap<String, String> dictionary;
 	String rack;
-	ScrabbleWordSuggester(String rack)
-	{
+	ScrabbleWordSuggester(String rack) {
+		dictionary = new HashMap<String, String>();
 		buildDictionary();
 		sortDictionaryDescendingly();
 		this.rack = rack;
@@ -41,27 +42,40 @@ import java.util.*;
 		printSuggestions(findPossibleWords(dictionary, rack));
 	}
 
-	private void buildDictionary()
-	{
-		dictionary = new ArrayList<Word>();
+	private void buildDictionary() {
 		try {
-			Scanner sc = new Scanner(new File(FILE_PATH));
-			while ( sc.hasNext() ) {
-				String word = sc.next();
-				Word wordWithScore = new Word(word, calculateScore(word));
-				dictionary.add(wordWithScore);
+			BufferedReader fileReader = new BufferedReader(new fileReader(FILE_PATH));
+			String sortedWordd = "";
+			while ( (nextWord = fileReader.readLine()) != null ) {
+				sortedWord = getWordSortedByCharacter(nextWord);
+				addtoDictionary(sortedWord, nextWord);
 			}
-		} catch (FileNotFoundException e) {
+		} 
+		catch (FileNotFoundException e) {
 			e.printStackTrace();
+		}
+	}
+
+	private static String getWordSortedByCharacter(String in) {
+		char[] chars = in.toCharArray();
+		Arrays.sort(chars);
+		return new String(chars);
+	}
+	
+	private static void addtoDictionary(String sortedWord, String currentWord) {
+		if ( dictionary.containsKey(sortedWord) ) {
+			dictionary.put(sortedWord, dictionary.get(sortedWord) + " " + currentWord);
+		} 
+		else {
+			int score = calculateScore(sortedWord);
+			dictionary.put(sortedWord, score + " " + currentWord);
 		}
 	}
 
 	public int calculateScore(String word) {
 		int value = 0;
-		for (int i = 0; i < word.length(); i++ )
-		{
-			char c = word.charAt(i);
-			value += SCORE_OF_LETTERS[c-'A'];
+		for ( char c : word.toCharArray() ) {
+			value += SCORE_OF_LETTERS[c - CHARACTER_A];
 		}
 		return value;
 	}
@@ -69,5 +83,4 @@ import java.util.*;
 	void sortDictionaryDescendingly() {
 		Collections.sort(dictionary);
 	}
-
 }
