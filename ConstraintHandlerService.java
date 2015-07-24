@@ -3,7 +3,7 @@ package ScrabbleTeam3;
 import java.util.List;
 
 public class ConstraintHandlerService {
-	private final String BLANK_TILE = " ";
+	private final String BLANK_TILE = "*";
 	private final String EMPTY_STRING = "";
 
 	public List<Word> applyConstraint(String constraintPattern, String tiles) {
@@ -20,7 +20,6 @@ public class ConstraintHandlerService {
 		possibleWords = applyPatternMatching(possibleWords, constraintPattern);
 		return possibleWords;
 	}
-
 
 	private static List<Word> applyPatternMatching(List<Word> possibleWords, String constraintPattern) {
 

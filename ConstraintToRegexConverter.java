@@ -48,7 +48,7 @@ public class ConstraintToRegexConverter
 	      return regex.toString();
 	   }
 	 
-	 static boolean isMatching(String word, String regex)
+	 public static boolean isMatching(String word, String regex)
 	 {
 		  Pattern pattern = Pattern.compile(regex);
 	      Matcher matcher = pattern.matcher(word);
