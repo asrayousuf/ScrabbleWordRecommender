@@ -22,15 +22,34 @@ class BlankHandling {
 		HashMap<Integer, String> scoreMap = new HashMap<Integer, String>();
 		Iterator <Map.Entry<String, String>> possibleWordsIterator = possibleWordsMap.entrySet();
 		String currentEntryValue = "";
-		String currentEntryKey = "";
+		char[] currentKey;
+		char[] rack = rackWithoutBlanks.toCharArray();
 		int score = 0;
+		boolean loop = true;
 
 		while( possibleWordsIterator.hasNext() ){
 			Map.Entry<String, String> possibleWordEntry = possibleWordsIterator.next();
 			currentEntryValue = possibleWordEntry.getValue();
 			score = Integer.parseInt( (holderString.split(" ")[0] );
 			currentEntryKey = possibleWordEntry.getKey();
+			currentKey = (possibleWordEntry.getKey()).toCharArray();
 			
+			for( char letter :  rack){
+				for ( int i = 0; (loop && i < currentKey.length) ; i++ ){
+					if (loop && letter == currentKey[i]){
+						currentKey[i] = '*';
+						loop = false;
+					}
+				}
+				loop = true;
+			}
+			
+			for( char letter : currentKey ){
+				if(letter != '*')
+					score -= SCORE_OF_LETTERS[ letter - A_ASCII ];
+			}
+			
+			scoreMap.put(score, currentEntryValue);
 		}
 		
 		return scoreMap;
