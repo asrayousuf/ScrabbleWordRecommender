@@ -19,14 +19,20 @@ public class ConstraintHandlerService {
 		return possibleWords;
 	}
 
-	private List<Word> applyPatternMatching(List<Word> possibleWords, String contraint) {
 
-			List<Word> patternMatchedWords = new List<Word> ();
+	private static List<Word> applyPatternMatching(List<Word> possibleWords, String constraintPattern) {
+
+		char[] constraintPatternArray = constraintPattern.toCharArray();
+		List<Word> patternMatchedWords = new ArrayList<Word> ();
+		String pattern= regexPattern(constraintPattern);
 		
-			
-			return patternMatchedWords;
-		
-	}
+		for(Word wordToMatch: possibleWords){
+			if(isMatching(wordToMatch.rankedWord, pattern) {
+				patternMatchedWords.add(new Word(wordToMatch.rankedWord, wordToMatch.score));
+			}
+		}
+		return patternMatchedWords;
+}
 
 	private String extractLetters(String constraint) {
 		String lettersInConstraint = EMPTY_STRING;
