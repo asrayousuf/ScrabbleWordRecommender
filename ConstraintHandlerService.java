@@ -29,8 +29,8 @@ public class ConstraintHandlerService {
 		String pattern= regexPattern(constraintPattern);
 		
 		for(Word wordToMatch: possibleWords){
-			if(isMatching(wordToMatch.rankedWord, pattern) {
-				patternMatchedWords.add(new Word(wordToMatch.rankedWord, wordToMatch.score));
+			if(isMatching(wordToMatch.getWord(), pattern) {
+				patternMatchedWords.add(new Word(wordToMatch.getWord(), wordToMatch.getScore()));
 			}
 		}
 		return patternMatchedWords;
