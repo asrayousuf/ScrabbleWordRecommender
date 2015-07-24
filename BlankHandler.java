@@ -6,23 +6,24 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-class BlankHandling {
+class BlankHandler {
 	
 	private static final String BLANK_TILE = "*";
 	private String rackWithoutBlanks;
 	static final int SCORE_OF_LETTERS[] = {1, 3, 3, 2, 1, 4, 2, 4, 1, 8, 5, 1, 3, 1, 1, 3, 10, 1, 1, 1, 1, 4, 4, 8, 4, 10};
 	static final int A_ASCII = 97;
 	
-	public BlankHandling() {
+	public BlankHandler() {
 		rackWithoutBlanks = "";
 	}
 	
-	public HashMap<Integer , String> rankWordScores(HashMap<String, String> possibleWordsMap){
+	public SortedMap<Integer , String> rankWordScores(Map<String, String> possibleWordsMap){
 		
-		HashMap<Integer, String> scoreMap = new HashMap<Integer, String>();
-		Iterator <HashMap.Entry<String, String>> possibleWordsIterator = possibleWordsMap.entrySet().iterator();
+		SortedMap<Integer, String> scoreMap = new TreeMap<Integer, String>(Collections.reverseOrder());
+		Iterator <Map.Entry<String, String>> possibleWordsIterator = possibleWordsMap.entrySet().iterator();
 		String currentEntryValue = "";
 		char[] currentKey;
+		String[] currentValue;
 		char[] rack = rackWithoutBlanks.toCharArray();
 		int score = 0;
 		boolean loop = true;
@@ -30,7 +31,8 @@ class BlankHandling {
 		while( possibleWordsIterator.hasNext() ){
 			Map.Entry<String, String> possibleWordEntry = possibleWordsIterator.next();
 			currentEntryValue = possibleWordEntry.getValue();
-			score = Integer.parseInt(currentEntryValue.split(" ")[0]) ;
+			currentValue = currentEntryValue.split(" ");
+			score = Integer.parseInt(currentValue[0]) ;
 			currentKey = (possibleWordEntry.getKey()).toCharArray();
 			
 			for( char letter :  rack){
@@ -48,11 +50,21 @@ class BlankHandling {
 					score -= SCORE_OF_LETTERS[ letter - A_ASCII ];
 			}
 			
+			currentValue[0] = "";
+			
+			currentEntryValue = "";
+			
+			for(String words : currentValue){
+				if( !words.equals("") )
+					currentEntryValue += (words + " ");
+			}
+			
 			scoreMap.put(score, currentEntryValue);
 		}
 		
 		return scoreMap;
 	}
+
 	
 	private String sortRack(String rack) {
         	char[] characters_in_rack = rack.toCharArray();

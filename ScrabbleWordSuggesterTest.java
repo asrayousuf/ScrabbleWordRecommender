@@ -26,4 +26,21 @@ public class ScrabbleWordSuggestorTest {
 	public void ifWordMatchesTestWithBlanks(){
 		assertTrue(ScrabbleWordSuggester.ifWordMatches("HOUR","OUR ",0));
 	}
+	@Test
+	public void getWordSortedByCharacterTest() throws IOException {
+		ScrabbleWordSuggester scrabbleWordSuggester = new ScrabbleWordSuggester("cat");
+		assertEquals("Should return abcd", "abcd", scrabbleWordSuggester.getWordSortedByCharacter("bcad"));
+	}
+	@Test
+	public void testGetSortedList() throws IOException {
+		ScrabbleWordSuggester scrabbleWordSuggester = new ScrabbleWordSuggester("cat");
+		HashMap<String,String> dictionary=new HashMap<String,String>();
+		dictionary.put("abcd", "10 bcda cdba dbac");
+		dictionary.put("xyz", "5 xzy yzx");
+		HashMap<String, String> sorted_list = scrabbleWordSuggester.getSortedList(dictionary);
+		Map.Entry<String,String> entry=sorted_list.entrySet().iterator().next();
+		 String firstKey= entry.getKey();
+		 String firstValue=entry.getValue();
+		assertTrue("First element should be abcd", "abcd".equals(firstKey));
+	}
 }
