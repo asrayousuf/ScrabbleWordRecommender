@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 class BlankHandling {
 	
-	private static final String BLANK_VALUE = "*";
+	private static final String BLANK_TILE = "*";
 	private String rackWithoutBlanks;
 	
 	public BlankHandling() {
@@ -44,9 +44,17 @@ class BlankHandling {
 		return formedWordsList;
 	}
 	
-	public int getNumberOfBlanks(String rack_with_blanks) {
-		rackWithoutBlanks = rack_with_blanks.replace(BLANK_VALUE, "");
-		int blankCount = rack_with_blanks.length() - rackWithoutBlanks.length();
+	private int countBlankTiles(String rack_with_blanks) {
+		int blankCount = rack_with_blanks.length() - rack_with_blanks.replace(BLANK_TILE, "").length();
 		return blankCount;		
+	}
+	
+	private boolean hasBlankTiles(String players_rack) {
+		return players_rack.contains(BLANK_TILE);
+	}
+	
+	private String getRackWithoutBlankTiles(String rack_with_blanks) {
+		rackWithoutBlanks = rack_with_blanks.replace(BLANK_TILE, "");
+		return rackWithoutBlanks;
 	}
 }
