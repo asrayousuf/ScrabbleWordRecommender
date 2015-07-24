@@ -19,7 +19,7 @@ public class ConstraintHandlerService {
 	}
 
 
-	private static List<String> applyPatternMatching(List<String> possibleWords, String constraintPattern) {
+	private List<String> applyPatternMatching(List<String> possibleWords, String constraintPattern) {
 		List<String> patternMatchedWords = new ArrayList<String> ();
 		String pattern= ConstraintToRegexConvert.convertToRegex(constraintPattern);
 		
