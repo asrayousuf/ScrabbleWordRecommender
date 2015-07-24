@@ -3,6 +3,7 @@ package ScrabbleTeam3;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.*;
@@ -42,10 +43,11 @@ import java.util.*;
 		printSuggestions(findPossibleWords(dictionary, rack));
 	}
 
-	private void buildDictionary() {
+	private void buildDictionary() throws IOException {
 		try {
-			BufferedReader fileReader = new BufferedReader(new fileReader(FILE_PATH));
-			String sortedWordd = "";
+			BufferedReader fileReader = new BufferedReader(new FileReader(FILE_PATH));
+			String nextWord;
+			String sortedWord = "";
 			while ( (nextWord = fileReader.readLine()) != null ) {
 				sortedWord = getWordSortedByCharacter(nextWord);
 				addtoDictionary(sortedWord, nextWord);
@@ -56,13 +58,13 @@ import java.util.*;
 		}
 	}
 
-	private static String getWordSortedByCharacter(String in) {
+	private String getWordSortedByCharacter(String in) {
 		char[] chars = in.toCharArray();
 		Arrays.sort(chars);
 		return new String(chars);
 	}
 	
-	private static void addtoDictionary(String sortedWord, String currentWord) {
+	private void addtoDictionary(String sortedWord, String currentWord) {
 		if ( dictionary.containsKey(sortedWord) ) {
 			dictionary.put(sortedWord, dictionary.get(sortedWord) + " " + currentWord);
 		} 
@@ -72,7 +74,7 @@ import java.util.*;
 		}
 	}
 
-	public int calculateScore(String word) {
+	public  int calculateScore(String word) {
 		int value = 0;
 		for ( char c : word.toCharArray() ) {
 			value += SCORE_OF_LETTERS[c - CHARACTER_A];
