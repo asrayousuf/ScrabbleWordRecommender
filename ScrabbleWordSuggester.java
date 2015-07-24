@@ -8,14 +8,14 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.*;
 
-
-	public class ScrabbleWordSuggester
-{
-	static final int SCORE_OF_LETTERS[] = {1,3,3,2,1,4,2,4,1,8,5,1,3,1,1,3,10,1,1,1,1,4,4,8,4,10};
+public class ScrabbleWordSuggester {
+	static final int SCORE_OF_LETTERS[] = { 1, 3, 3, 2, 1, 4, 2, 4, 1, 8, 5, 1, 3, 1, 1, 3, 10, 1, 1, 1, 1, 4, 4, 8, 4,
+			10 };
 	static final char CHARACTER_A = 'A';
 	static final String FILE_PATH = "C:\\Users\\test\\workspace\\BootCamp\\src\\ScrabbleTeam3\\sowpods.txt";
 	static HashMap<String, String> dictionary;
 	String rack;
+
 	ScrabbleWordSuggester(String rack) {
 		dictionary = new HashMap<String, String>();
 		buildDictionary();
@@ -23,24 +23,23 @@ import java.util.*;
 		this.rack = rack;
 	}
 
-	public static void main(String args[]) throws IOException
-	{
+	public static void main(String args[]) throws IOException {
 		Scanner scanner = new Scanner(System.in);
 
 		System.out.println("Enter String");
 		ScrabbleWordSuggester scrabbleWordSuggester = new ScrabbleWordSuggester(scanner.nextLine());
 		System.out.println("Do you wish to consider any constraints: Y/N");
-		String answer= scanner.nextLine();
+		String answer = scanner.nextLine();
 		String constraint;
-				if(answer.equalsIgnoreCase("Y")){
-					System.out.println("Enter your constraint");
-					constraint=scanner.nextLine();
-				}
+		if (answer.equalsIgnoreCase("Y")) {
+			System.out.println("Enter your constraint");
+			constraint = scanner.nextLine();
+		}
 
 		System.out.println("Enter number of suggested words to be returned");
-		int NUMBER_OF_SUGGESTIONS_NEEDED=scanner.nextInt();
+		int NUMBER_OF_SUGGESTIONS_NEEDED = scanner.nextInt();
 
-		printSuggestions(findPossibleWords(dictionary, rack));
+		printSuggestions(scrabbleWordSuggester.findPossibleWords(scrabbleWordSuggester.rack, 0));
 	}
 
 	private void buildDictionary() throws IOException {
@@ -48,12 +47,11 @@ import java.util.*;
 			BufferedReader fileReader = new BufferedReader(new FileReader(FILE_PATH));
 			String nextWord;
 			String sortedWord = "";
-			while ( (nextWord = fileReader.readLine()) != null ) {
+			while ((nextWord = fileReader.readLine()) != null) {
 				sortedWord = getWordSortedByCharacter(nextWord);
 				addtoDictionary(sortedWord, nextWord);
 			}
-		}
-		catch (FileNotFoundException e) {
+		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
 	}
@@ -65,18 +63,17 @@ import java.util.*;
 	}
 
 	private void addtoDictionary(String sortedWord, String currentWord) {
-		if ( dictionary.containsKey(sortedWord) ) {
+		if (dictionary.containsKey(sortedWord)) {
 			dictionary.put(sortedWord, dictionary.get(sortedWord) + " " + currentWord);
-		}
-		else {
+		} else {
 			int score = calculateScore(sortedWord);
 			dictionary.put(sortedWord, score + " " + currentWord);
 		}
 	}
 
-	public  int calculateScore(String word) {
+	public int calculateScore(String word) {
 		int value = 0;
-		for ( char c : word.toCharArray() ) {
+		for (char c : word.toCharArray()) {
 			value += SCORE_OF_LETTERS[c - CHARACTER_A];
 		}
 		return value;
@@ -87,7 +84,6 @@ import java.util.*;
 	}
 
 	ArrayList<String> findPossibleWords(String rack, int numOfBlanks) {
-		Map<String, String> dictionary = new Map<String, String>();
 		ArrayList<String> listOfPossibleWords = new ArrayList<String>();
 		for (Map.Entry<String, String> entry : dictionary.entrySet()) {
 			String sortedWord = entry.getKey();
@@ -115,5 +111,14 @@ import java.util.*;
 			characterListofWord.remove(new Character(c));
 		}
 		return (characterListofWord.size() == numOfBlanks);
+	}
+
+	public static void printSuggestions(List<String> listOfWords) {
+		if (listOfWords.isEmpty()) {
+			System.out.println("No suggestions");
+		}
+		for (String word : listOfWords)
+			System.out.print(word + " ");
+		System.out.println();
 	}
 }
