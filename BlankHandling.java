@@ -7,9 +7,16 @@ import java.util.ArrayList;
 
 class BlankHandling {
 
-public static List<String> addBlank(List<String> formedWordsList, String word, int spaceCount){
+	public Set<String> addBlankHelper(String word, int spaceCount){
+	
+		Set<String> formedWordsList = new HashSet<String>();
+		return addBlank(formedWordsList, word, spaceCount);
+	
+	}
+	
+	public static Set<String> addBlank(Set<String> formedWordsList, String word, int spaceCount){
 		
-		if(spaceCount== 0){
+		if(spaceCount == 0){
 			formedWordsList.add(word);
 		}
 		else
@@ -21,8 +28,9 @@ public static List<String> addBlank(List<String> formedWordsList, String word, i
 						index++;
 					}
 				}
-				String toAdd = word.substring(0, index) + i + word.substring(index, word.length());
-				formedWordsList = addBlank(formedWordsList, toAdd, spaceCount-1);
+				String newWord = word.substring(0, index) + i + word.substring(index, word.length());
+				formedWordsList.add(newWord);
+				formedWordsList = addBlank(formedWordsList, newWord, spaceCount-1);
 			}
 		}
 		
@@ -30,12 +38,13 @@ public static List<String> addBlank(List<String> formedWordsList, String word, i
 	}
 	
 	public static void main(String[] args) {
+	
 		String word = "cnt";
+		int spaceCount = 2;
 		
-		List<String> formedWordsList = new ArrayList<String>();
-		formedWordsList = addBlank(formedWordsList, word, 2);
+		BlankHandling blankHandling = new BlankHandling();
+		System.out.println(blankHandling.addBlankHelper(word, spaceCount));
 		
-		System.out.println(formedWordsList);
 	}
 
 }
