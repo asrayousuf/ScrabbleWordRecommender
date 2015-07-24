@@ -13,9 +13,9 @@ This module creates the data structure from the dictionary, pre-compute scores f
 #### Handling Blank Input Tiles 
 This module handles the blank input tiles and computes the score for the blank tiles to be subtracted.
 ##### Team 
-1. Mohanish Golatkar
-2. Neel Paratkar
-3. Sri Harish
+1. Mohanish Golatkar - *Create the bsae structure of Blank Handling class and the sortRack() funtion*
+2. Neel Paratkar - *Write the method which calculates the score when blank  tile is present in the rack*
+3. Sri Harish - *Create the Blank Handling functions that checks if blanks present,get count and remove blanks*
 
 #### Handling Input Constraints from Board
 This module handles the constraints from the board such as letter positioning and maximum length of  the word.  
