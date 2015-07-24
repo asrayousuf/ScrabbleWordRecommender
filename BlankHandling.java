@@ -4,6 +4,7 @@ import java.io.*;
 
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 class BlankHandling {
 	
@@ -35,7 +36,14 @@ class BlankHandling {
 		return scoreMap;
 	}
 	
-	
+	private  sortRack(String word)
+    {
+        char[] chars = word.toCharArray();
+        Arrays.sort(chars);
+        String sortedRack = new String(chars);
+        return sortedRack;
+    }
+    
 	private int countBlankTiles(String rack_with_blanks) {
 		int blankCount = rack_with_blanks.length() - rack_with_blanks.replace(BLANK_TILE, "").length();
 		return blankCount;		
@@ -47,6 +55,7 @@ class BlankHandling {
 	
 	private String getRackWithoutBlankTiles(String rack_with_blanks) {
 		rackWithoutBlanks = rack_with_blanks.replace(BLANK_TILE, "");
+		rackwithoutBlanks = sortRack(rackWithoutBlanks);
 		return rackWithoutBlanks;
 	}
 }
