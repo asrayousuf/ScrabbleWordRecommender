@@ -12,15 +12,14 @@ public class ConstraintHandlerService {
 		return tiles + lettersInConstraint;
 	}
 
-	public List<String> applyPatternMatching(List<String> possibleWords, String constraintPattern) {
 
-		char[] constraintPatternArray = constraintPattern.toCharArray();
-		List<String> patternMatchedWords = new ArrayList<String> ();
-		String pattern= regexPattern(constraintPattern);
+	private static List<Word> applyPatternMatching(List<Word> possibleWords, String constraintPattern) {
+		List<Word> patternMatchedWords = new ArrayList<Word> ();
+		String pattern= ConstraintToRegexConvert.convertToRegex(constraintPattern);
 		
-		for(String word: possibleWords){
-			if(isMatching(word, pattern)) {
-				patternMatchedWords.add(word);
+		for(Word wordToMatch: possibleWords){
+			if(ConstraintToRegexConverter.isMatching(wordToMatch.getWord(), pattern) {
+				patternMatchedWords.add(new Word(wordToMatch.getWord(), wordToMatch.getScore()));
 			}
 		}
 		return patternMatchedWords;
