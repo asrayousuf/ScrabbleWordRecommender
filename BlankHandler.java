@@ -10,11 +10,14 @@ class BlankHandler {
 	
 	private static final String BLANK_TILE = "*";
 	private String rackWithoutBlanks;
+	private int blankCount;
 	static final int SCORE_OF_LETTERS[] = {1, 3, 3, 2, 1, 4, 2, 4, 1, 8, 5, 1, 3, 1, 1, 3, 10, 1, 1, 1, 1, 4, 4, 8, 4, 10};
 	static final int A_ASCII = 97;
 	
-	public BlankHandler() {
-		rackWithoutBlanks = "";
+	public BlankHandler(String rack) {
+		this.blankCount = rack.length() - rack.replace(BLANK_TILE, "").length();
+		this.rackWithoutBlanks = rack_with_blanks.replace(BLANK_TILE, "");
+		this.rackWithoutBlanks = sortRack(this.rackWithoutBlanks);
 	}
 	
 	public SortedMap<Integer , String> rankWordScores(Map<String, String> possibleWordsMap){
@@ -46,7 +49,7 @@ class BlankHandler {
 			}
 			
 			for( char letter : currentKey ){
-				if(letter != '*')
+				if(letter != BLANK_TILE)
 					score -= SCORE_OF_LETTERS[ letter - A_ASCII ];
 			}
 			
@@ -64,7 +67,6 @@ class BlankHandler {
 		
 		return scoreMap;
 	}
-
 	
 	private String sortRack(String rack) {
         	char[] characters_in_rack = rack.toCharArray();
@@ -72,18 +74,15 @@ class BlankHandler {
         	return new String(characters_in_rack);
 	}
     
-	private int countBlankTiles(String rack_with_blanks) {
-		int blankCount = rack_with_blanks.length() - rack_with_blanks.replace(BLANK_TILE, "").length();
+	private int countBlankTiles() {
 		return blankCount;		
 	}
 	
-	private boolean hasBlankTiles(String players_rack) {
-		return players_rack.contains(BLANK_TILE);
+	private boolean hasBlankTiles() {
+		return blankCount > 0;
 	}
 	
-	private String getRackWithoutBlankTiles(String rack_with_blanks) {
-		rackWithoutBlanks = rack_with_blanks.replace(BLANK_TILE, "");
-		rackWithoutBlanks = sortRack(rackWithoutBlanks);
+	private String getRackWithoutBlankTiles() {
 		return rackWithoutBlanks;
 	}
 }
