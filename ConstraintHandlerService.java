@@ -13,13 +13,13 @@ public class ConstraintHandlerService {
 	}
 
 
-	private static List<Word> applyPatternMatching(List<Word> possibleWords, String constraintPattern) {
-		List<Word> patternMatchedWords = new ArrayList<Word> ();
+	private static List<String> applyPatternMatching(List<String> possibleWords, String constraintPattern) {
+		List<String> patternMatchedWords = new ArrayList<String> ();
 		String pattern= ConstraintToRegexConvert.convertToRegex(constraintPattern);
 		
-		for(Word wordToMatch: possibleWords){
-			if(ConstraintToRegexConverter.isMatching(wordToMatch.getWord(), pattern) {
-				patternMatchedWords.add(new Word(wordToMatch.getWord(), wordToMatch.getScore()));
+		for(String wordToMatch: possibleWords){
+			if(ConstraintToRegexConverter.isMatching(wordToMatch, pattern)) {
+				patternMatchedWords.add(wordToMatch);
 			}
 		}
 		return patternMatchedWords;
