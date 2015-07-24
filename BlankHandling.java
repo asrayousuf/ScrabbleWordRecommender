@@ -36,13 +36,11 @@ class BlankHandling {
 		return scoreMap;
 	}
 	
-	private  sortRack(String word)
-    {
-        char[] chars = word.toCharArray();
-        Arrays.sort(chars);
-        String sortedRack = new String(chars);
-        return sortedRack;
-    }
+	private String sortRack(String rack) {
+        	char[] character_in_rack = rack.toCharArray();
+        	Arrays.sort(characters_in_rack);
+        	return new String(characters_in_rack);
+	}
     
 	private int countBlankTiles(String rack_with_blanks) {
 		int blankCount = rack_with_blanks.length() - rack_with_blanks.replace(BLANK_TILE, "").length();
