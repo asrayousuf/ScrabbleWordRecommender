@@ -54,11 +54,4 @@ public class ConstraintToRegexConverter
 	      return (matcher.find( ));
 	 }
 	 
-	 public static void main(String args[])
-	 {
-		ConstraintToRegexConverter cobj = new ConstraintToRegexConverter();
-		String regex = (cobj.convertToRegex("**c**p*a*"));
-		System.out.println(regex);
-		System.out.println(isMatching("iceapxa", regex));
-	 }
 }
