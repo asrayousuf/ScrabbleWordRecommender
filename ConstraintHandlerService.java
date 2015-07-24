@@ -1,25 +1,26 @@
-import java.util.Map;
+import java.util.List;
 
 public class ConstraintHandlerService {
 	private final String BLANK_TILE = " ";
 	private final String EMPTY_STRING = "";
 
-	public Map<String, Integer> applyConstraint(String constraint, String tiles) {
+	public List<Word> applyConstraint(String constraint, String tiles) {
 		String lettersInConstraint = extractLetters(constraint);
 		String letters = tiles + lettersInConstraint;
-		Map<String, Integer> possibleWords;
+		List<Word> possibleWords;
 		if (hasBlankTiles(tiles)) {
-			possibleWords = findAllPossibleWordsWithBlanks(letters);//team 2 function
+			possibleWords = findAllPossibleWordsWithBlanks(letters);// team 2
+																	// function
 		} else {
-			possibleWords = findAllPossibleWords(letters);//team 1 function
+			possibleWords = findAllPossibleWords(letters);// team 1 function
 
 		}
 		possibleWords = applyPatternMatching(possibleWords, constraint);
 		return possibleWords;
 	}
 
-	private Map<String, Integer> applyPatternMatching(
-			Map<String, Integer> possibleWords, String contraint) {
+	private List<Word> applyPatternMatching(List<Word> possibleWords,
+			String contraint) {
 		// return list of pattern matched words
 		return null;
 	}
