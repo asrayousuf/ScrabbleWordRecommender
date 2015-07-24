@@ -19,10 +19,13 @@ public class ConstraintHandlerService {
 		return possibleWords;
 	}
 
-	private List<Word> applyPatternMatching(List<Word> possibleWords,
-			String contraint) {
-		// return list of pattern matched words
-		return null;
+	private List<Word> applyPatternMatching(List<Word> possibleWords, String contraint) {
+
+			List<Word> patternMatchedWords = new List<Word> ();
+		
+			
+			return patternMatchedWords;
+		
 	}
 
 	private String extractLetters(String constraint) {
