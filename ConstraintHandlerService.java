@@ -6,7 +6,9 @@ import java.util.List;
 public class ConstraintHandlerService {
 	private final String BLANK_TILE = "*";
 	private final String EMPTY_STRING = "";
-	String tiles;
+	
+	private String tiles;
+	
 	public ConstraintHandlerService(String tiles) {
 		this.tiles=tiles;
 	}
@@ -39,9 +41,5 @@ public class ConstraintHandlerService {
 		}
 
 		return lettersInConstraint;
-	}
-
-	private boolean hasBlankTiles(String tiles) {
-		return tiles.contains(BLANK_TILE);
 	}
 }
