@@ -6,28 +6,20 @@ public class ConstraintHandlerService {
 	private final String BLANK_TILE = "*";
 	private final String EMPTY_STRING = "";
 
-	public List<Word> applyConstraint(String constraintPattern, String tiles) {
+	public String appendConstraintLetters(String constraintPattern, String tiles) {
 		String lettersInConstraint = extractLetters(constraintPattern);
-		String letters = tiles + lettersInConstraint;
-		List<Word> possibleWords;
-		if (hasBlankTiles(tiles)) {
-			possibleWords = findAllPossibleWordsWithBlanks(letters);// team 2
-																	// function
-		} else {
-			possibleWords = findAllPossibleWords(letters);// team 1 function
-
-		}
-		possibleWords = applyPatternMatching(possibleWords, constraintPattern);
-		return possibleWords;
+		return tiles + lettersInConstraint;
 	}
 
-	private static List<Word> applyPatternMatching(List<Word> possibleWords, String constraintPattern) {
-		List<Word> patternMatchedWords = new ArrayList<Word> ();
-		String pattern= ConstraintToRegexConvert.convertToRegex(constraintPattern);
+	public List<String> applyPatternMatching(List<String> possibleWords, String constraintPattern) {
+
+		char[] constraintPatternArray = constraintPattern.toCharArray();
+		List<String> patternMatchedWords = new ArrayList<String> ();
+		String pattern= regexPattern(constraintPattern);
 		
-		for(Word wordToMatch: possibleWords){
-			if(ConstraintToRegexConverter.isMatching(wordToMatch.getWord(), pattern) {
-				patternMatchedWords.add(new Word(wordToMatch.getWord(), wordToMatch.getScore()));
+		for(String word: possibleWords){
+			if(isMatching(word, pattern) {
+				patternMatchedWords.add(word);
 			}
 		}
 		return patternMatchedWords;
