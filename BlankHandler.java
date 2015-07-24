@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-class BlankHandling {
+class BlankHandler {
 	
 	private static final String BLANK_TILE = "*";
 	private String rackWithoutBlanks;
