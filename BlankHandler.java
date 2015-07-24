@@ -17,12 +17,13 @@ class BlankHandler {
 		rackWithoutBlanks = "";
 	}
 	
-	public HashMap<Integer , String> rankWordScores(HashMap<String, String> possibleWordsMap){
+	public SortedMap<Integer , String> rankWordScores(Map<String, String> possibleWordsMap){
 		
-		HashMap<Integer, String> scoreMap = new HashMap<Integer, String>();
-		Iterator <HashMap.Entry<String, String>> possibleWordsIterator = possibleWordsMap.entrySet().iterator();
+		SortedMap<Integer, String> scoreMap = new TreeMap<Integer, String>(Collections.reverseOrder());
+		Iterator <Map.Entry<String, String>> possibleWordsIterator = possibleWordsMap.entrySet().iterator();
 		String currentEntryValue = "";
 		char[] currentKey;
+		String[] currentValue;
 		char[] rack = rackWithoutBlanks.toCharArray();
 		int score = 0;
 		boolean loop = true;
@@ -30,7 +31,8 @@ class BlankHandler {
 		while( possibleWordsIterator.hasNext() ){
 			Map.Entry<String, String> possibleWordEntry = possibleWordsIterator.next();
 			currentEntryValue = possibleWordEntry.getValue();
-			score = Integer.parseInt(currentEntryValue.split(" ")[0]) ;
+			currentValue = currentEntryValue.split(" ");
+			score = Integer.parseInt(currentValue[0]) ;
 			currentKey = (possibleWordEntry.getKey()).toCharArray();
 			
 			for( char letter :  rack){
@@ -48,11 +50,21 @@ class BlankHandler {
 					score -= SCORE_OF_LETTERS[ letter - A_ASCII ];
 			}
 			
+			currentValue[0] = "";
+			
+			currentEntryValue = "";
+			
+			for(String words : currentValue){
+				if( !words.equals("") )
+					currentEntryValue += (words + " ");
+			}
+			
 			scoreMap.put(score, currentEntryValue);
 		}
 		
 		return scoreMap;
 	}
+
 	
 	private String sortRack(String rack) {
         	char[] characters_in_rack = rack.toCharArray();
