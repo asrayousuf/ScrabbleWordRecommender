@@ -1,3 +1,5 @@
+package ScrabbleTeam3;
+
 import java.util.List;
 
 public class ConstraintHandlerService {
