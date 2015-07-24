@@ -6,8 +6,8 @@ public class ConstraintHandlerService {
 	private final String BLANK_TILE = " ";
 	private final String EMPTY_STRING = "";
 
-	public List<Word> applyConstraint(String constraint, String tiles) {
-		String lettersInConstraint = extractLetters(constraint);
+	public List<Word> applyConstraint(String constraintPattern, String tiles) {
+		String lettersInConstraint = extractLetters(constraintPattern);
 		String letters = tiles + lettersInConstraint;
 		List<Word> possibleWords;
 		if (hasBlankTiles(tiles)) {
@@ -17,7 +17,7 @@ public class ConstraintHandlerService {
 			possibleWords = findAllPossibleWords(letters);// team 1 function
 
 		}
-		possibleWords = applyPatternMatching(possibleWords, constraint);
+		possibleWords = applyPatternMatching(possibleWords, constraintPattern);
 		return possibleWords;
 	}
 
