@@ -52,7 +52,7 @@ public class ScrabbleWordSuggester {
 				break;
 			String score = entry.getValue().substring(0,
 					entry.getValue().indexOf(" "));
-			String word = entry.getValue()
+			String word = entry.getValue().trim().
 					.substring(entry.getValue().indexOf(" "))
 					.replaceAll(" ", WORDS_SEPERATOR);
 			System.out
