@@ -1,7 +1,8 @@
+package ScrabbleTeam3;
+
 import java.util.*;
 import java.lang.*;
 import java.io.*;
-
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Arrays;
