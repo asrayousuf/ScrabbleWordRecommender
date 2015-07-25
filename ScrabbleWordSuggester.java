@@ -12,10 +12,11 @@ import java.util.*;
 {
 	static final int SCORE_OF_LETTERS[] = {1,3,3,2,1,4,2,4,1,8,5,1,3,1,1,3,10,1,1,1,1,4,4,8,4,10};
 	static final char CHARACTER_A = 'A';
+	static final char WORDS_SEPERATOR = ', ';
 	static final String FILE_PATH = "C:\\Users\\test\\workspace\\BootCamp\\src\\ScrabbleTeam3\\sowpods.txt";
 	
 	private HashMap<String, String> dictionary;
-	private BlankHandling blankHandler;
+	private BlankHandler blankHandler;
 	private ConstraintHandlerService constraintHandler;
 	
 	ScrabbleWordSuggester() {
@@ -59,8 +60,11 @@ import java.util.*;
 				possibleWords = constraintHandler.applyPatternMatching(possibleWords)
 			}
 
-			//TO-DO - To compute final scores of the resultant words from Blank handler if blank spaces were present and print  
+			if ( blankHandler.hasBlankTiles() ) {
+				possibleWords = blankHandler.rankWordScores();
+			}
 
+			printSuggestions(possibleWords);
 
 			System.out.println("Do you wish to search for another word? (y/n) ");
 			boolean nextSequence = false;
@@ -131,5 +135,13 @@ import java.util.*;
 		HashMap<String,String> sorted_map = new HashMap <String,String>();
 		sorted_map.putAll(dictionary);
 		return sorted_map;
+	}
+
+	private void printSuggestions(HashMap<String, String> words) {
+		for ( Map.Entry<String, String> entry : words.entrySet() ) {
+			String score = entry.getValue().substring(0, entry.getValue().indexOf(" "));
+			String words = entry.getValue().substring(entry.getValue().indexOf(" ")).replace(" ", WORDS_SEPERATOR);
+			System.out.println(score + " - " + words);	
+		}
 	}
 }
