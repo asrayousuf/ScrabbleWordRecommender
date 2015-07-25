@@ -56,14 +56,14 @@ public class WordSuggester {
 					.substring(entry.getValue().indexOf(" "))
 					.replaceAll(" ", WORDS_SEPERATOR);
 			System.out
-					.println(score + " - " + word.substring(2, word.length()));
+					.println(score + " - " + word.substring(1, word.length()));
 		}
 	}
 
 	private TreeMap<String, String> sortDescending(
 			HashMap<String, String> wordList) {
 		SortByScore sortObj = new SortByScore(wordList);
-		TreeMap<String, String> sorted_map = new TreeMap<String, String>();
+		TreeMap<String, String> sorted_map = new TreeMap<String, String>(sortObj);
 		sorted_map.putAll(wordList);
 		return sorted_map;
 	}
