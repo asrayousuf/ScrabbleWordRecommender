@@ -35,7 +35,7 @@ public class WordSuggester {
 			HashMap<String, String> possibleWords = possibleWordsGenerator
 					.findPossibleWordsWithConstraints(rack, constraint);
 			
-			printSuggestedWords(sortDescending(possibleWords));
+			printSuggestedWords(sortDescending(possibleWords), required_suggestions);
 
 			System.out
 					.println("Do you wish to search for another word? (y/n) ");
@@ -45,9 +45,11 @@ public class WordSuggester {
 		} while (nextSequence);
 	}
 
-	public void printSuggestedWords(TreeMap<String, String> words) {
+	public void printSuggestedWords(TreeMap<String, String> words, int numberOfSuggestions) {
 
 		for (Map.Entry<String, String> entry : words.entrySet()) {
+			if(numberOfSuggestions-- == 0)
+				break;
 			String score = entry.getValue().substring(0,
 					entry.getValue().indexOf(" "));
 			String word = entry.getValue()
