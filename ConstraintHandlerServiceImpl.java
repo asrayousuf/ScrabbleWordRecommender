@@ -41,12 +41,11 @@ public class ConstraintHandlerServiceImpl implements ConstraintHandlerService {
 		}
 		return patternMatchedWords;
 }
-
-	private String extractLetters(String constraint) {
+		private String extractLetters(String constraint) {
 		String lettersInConstraint = EMPTY_STRING;
 
 		for (int index = 0; index < constraint.length(); index++) {
-			if (Character.isAlphabetic(constraint.charAt(index))) {
+			if (constraint.charAt(index) != '*') {
 				lettersInConstraint += constraint.charAt(index);
 			}
 		}
