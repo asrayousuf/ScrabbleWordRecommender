@@ -30,7 +30,7 @@ public class ScrabbleWordSuggester {
 			}
 			System.out
 					.println("Enter number of suggested words to be returned: ");
-			int required_suggestions = scanner.nextInt();
+			int required_suggestions = Integer.parseInt(scanner.nextLine());
 			
 			HashMap<String, String> possibleWords = possibleWordsGenerator
 					.findPossibleWordsWithConstraints(rack, constraint);
