@@ -12,7 +12,7 @@ import java.util.*;
 {
 	static final int SCORE_OF_LETTERS[] = {1,3,3,2,1,4,2,4,1,8,5,1,3,1,1,3,10,1,1,1,1,4,4,8,4,10};
 	static final char CHARACTER_A = 'A';
-	static final char WORDS_SEPERATOR = ', ';
+	static final String WORDS_SEPERATOR = ', ';
 	static final String FILE_PATH = "C:\\Users\\test\\workspace\\BootCamp\\src\\ScrabbleTeam3\\sowpods.txt";
 	
 	private HashMap<String, String> dictionary;
@@ -31,10 +31,10 @@ import java.util.*;
 
 	public void requestUserInteraction() {
 		Scanner scanner = new Scanner(System.in);
+		boolean nextSequence = false;
 		do {
 			System.out.println("Enter Tiles: ");
 			String rack = scanner.nextLine().trim();
-			int blankTiles = 0;
 
 			System.out.println("Do you wish to consider any constraints? (y/n) ");
 			String constraint = "";
@@ -44,30 +44,12 @@ import java.util.*;
 			}
 			System.out.println("Enter number of suggested words to be returned: ");
 			int required_suggestions = scanner.nextInt();
-			if ( constraint.length() > 0 ) {
-				constraintHandler = new ConstraintHandlerService(rack);
-				rack = constraintHandler.appendConstraintLetters(constraint);
-			}
-			blankHandler = new BlankHandler(rack);
-			if ( blankHandler.hasBlankTiles() ) {
-				blankTiles = blankHandler.countBlankTiles();
-				rack = blankHandler.getRackWithoutBlankTiles();
-			}
-
-			HashMap<String, String> possibleWords = findPossibleWords(rack, blankTiles);
-
-			if ( constraint.length > 0 ) {
-				possibleWords = constraintHandler.applyPatternMatching(possibleWords)
-			}
-
-			if ( blankHandler.hasBlankTiles() ) {
-				possibleWords = blankHandler.rankWordScores();
-			}
-
+			
+			HashMap<String, String> possibleWords = findPossibleWords(rack, constraint);
+			
 			printSuggestedWords(possibleWords);
 
 			System.out.println("Do you wish to search for another word? (y/n) ");
-			boolean nextSequence = false;
 			if( scanner.nextLine().equalsIgnoreCase("Y") ) {
 				nextSequence = true;
 			} 
@@ -113,21 +95,42 @@ import java.util.*;
 		return value;
 	}
 
-	public HashMap<String, String> findPossibleWords(String rack, int blankCount) {
+	public HashMap<String, String> findPossibleWords(String rack, String constraint) {
+		int blankTiles = 0;
+		if ( constraint.length() > 0 ) {
+			constraintHandler = new ConstraintHandlerServiceImpl(rack);
+			rack = constraintHandler.appendConstraintLettersToRack(constraint);
+		}
+		blankHandler = new BlankHandler(rack);
+		if ( blankHandler.hasBlankTiles() ) {
+			blankTiles = blankHandler.countBlankTiles();
+			rack = blankHandler.getRackWithoutBlankTiles();
+		}
 		HashMap<String, String> possibleWords = new HashMap<String, String>();
 		for (Map.Entry<String, String> entry : dictionary.entrySet()) {
 			if ( wordMatches(entry.getKey(), rack, blankCount) ) {
 				possibleWords.put(entry.getKey(), entry.getValue());	
 			}
 		}
+		if ( constraint.length() > 0 ) {
+			possibleWords = constraintHandler.applyPatternMatching(possibleWords, constraint);
+		}
+
+		if ( blankHandler.hasBlankTiles() ) {
+			possibleWords = blankHandler.rankWordScores();
+		}
 		return possibleWords;
 	}
 
 	private boolean wordMatches(String word, String rack, int blankCount) {
+		List<Character> characterListofWord = new LinkedList<Character>();
+		for (char c : word.toCharArray()) {
+			characterListofWord.add(c);	
+		}		
 		for (char c : rack.toCharArray()) {
-			word.remove(c);
+			characterListofWord.remove(new Character(c));
 		}
-		return (word.size() == blankCount);
+		return (characterListofWord.size() == blankCount);
 	}
 
 	private HashMap<String, String> getSortedList() {
@@ -140,7 +143,7 @@ import java.util.*;
 	public void printSuggestedWords(HashMap<String, String> words) {
 		for ( Map.Entry<String, String> entry : words.entrySet() ) {
 			String score = entry.getValue().substring(0, entry.getValue().indexOf(" "));
-			String words = entry.getValue().substring(entry.getValue().indexOf(" ")).replace(" ", WORDS_SEPERATOR);
+			String words = entry.getValue().substring(entry.getValue().indexOf(" ")).replaceAll(" ", WORDS_SEPERATOR);
 			System.out.println(score + " - " + words);	
 		}
 	}
