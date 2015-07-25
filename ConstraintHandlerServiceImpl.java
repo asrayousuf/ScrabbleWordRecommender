@@ -23,7 +23,7 @@ public class ConstraintHandlerServiceImpl implements ConstraintHandlerService {
 
 	public HashMap<String, String> applyPatternMatching(HashMap<String, String> possibleWords, String constraintPattern) {
 		HashMap<String, String> patternMatchedWords = new HashMap<String, String> ();
-		String pattern= ConstraintToRegexConvert.convertToRegex(constraintPattern);
+		String pattern= ConstraintToRegexConverter.convertToRegex(constraintPattern);
 		
 		Set<String> wordKeys = possibleWords.keySet();
 		for (String key: wordKeys) {
@@ -41,12 +41,11 @@ public class ConstraintHandlerServiceImpl implements ConstraintHandlerService {
 		}
 		return patternMatchedWords;
 }
-
-	private String extractLetters(String constraint) {
+		private String extractLetters(String constraint) {
 		String lettersInConstraint = EMPTY_STRING;
 
 		for (int index = 0; index < constraint.length(); index++) {
-			if (Character.isAlphabetic(constraint.charAt(index))) {
+			if (constraint.charAt(index) != '*') {
 				lettersInConstraint += constraint.charAt(index);
 			}
 		}
