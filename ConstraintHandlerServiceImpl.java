@@ -15,7 +15,7 @@ public class ConstraintHandlerServiceImpl implements ConstraintHandlerService {
 		this.tiles=tiles;
 	}
 	
-	public String appendConstraintLetters(String constraintPattern) {
+	public String appendConstraintLettersToRack(String constraintPattern) {
 		String lettersInConstraint = extractLetters(constraintPattern);
 		return tiles + lettersInConstraint;
 	}
