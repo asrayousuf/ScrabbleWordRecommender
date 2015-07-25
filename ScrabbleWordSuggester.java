@@ -8,10 +8,10 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.TreeMap;
 
-public class WordSuggester {
+public class ScrabbleWordSuggester {
 	static final String WORDS_SEPERATOR = ", ";
 	private PossibleWordsGenerator possibleWordsGenerator;
-	public WordSuggester(PossibleWordsGenerator gen) {
+	public ScrabbleWordSuggester(PossibleWordsGenerator gen) {
 		this.possibleWordsGenerator = gen;
 	}
 
@@ -39,7 +39,7 @@ public class WordSuggester {
 
 			System.out
 					.println("Do you wish to search for another word? (y/n) ");
-			if (scanner.nextLine().equalsIgnoreCase("Y")) {
+			if (scanner.next().equalsIgnoreCase("Y")) {
 				nextSequence = true;
 			}
 		} while (nextSequence);
@@ -70,7 +70,7 @@ public class WordSuggester {
 
 	public static void main(String args[]) throws IOException {
 		PossibleWordsGenerator wordsGenerator = new PossibleWordsGenerator();
-		WordSuggester wordSuggester = new WordSuggester(wordsGenerator);
-		wordSuggester.requestUserInteraction();
+		ScrabbleWordSuggester scrabbleWordSuggester = new ScrabbleWordSuggester(wordsGenerator);
+		scrabbleWordSuggester.requestUserInteraction();
 	}
 }
