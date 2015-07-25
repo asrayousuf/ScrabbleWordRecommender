@@ -1,7 +1,9 @@
 package ScrabbleTeam3;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
 
 public class ConstraintHandlerService {
 	private final String BLANK_TILE = "*";
@@ -19,13 +21,22 @@ public class ConstraintHandlerService {
 	}
 
 
-	private List<String> applyPatternMatching(List<String> possibleWords, String constraintPattern) {
-		List<String> patternMatchedWords = new ArrayList<String> ();
+	private HashMap<String, String> applyPatternMatching(HashMap<String, String> possibleWords, String constraintPattern) {
+		HashMap<String, String> patternMatchedWords = new HashMap<String, String> ();
 		String pattern= ConstraintToRegexConvert.convertToRegex(constraintPattern);
 		
-		for(String wordToMatch: possibleWords){
-			if(ConstraintToRegexConverter.isMatching(wordToMatch, pattern)) {
-				patternMatchedWords.add(wordToMatch);
+		Set<String> wordKeys = possibleWords.keySet();
+		for (String key: wordKeys) {
+			
+			String[] wordList = (possibleWords.get(key)).split(" ");
+			String inputValue = wordlist[0];
+			for(String wordToMatch: wordList)
+			{
+				if(ConstraintToRegexConverter.isMatching(wordToMatch, pattern)) {
+					inputValue += " " + wordToMatch;
+			}
+				patternMatchedWords.put(key, inputValue);
+			
 			}
 		}
 		return patternMatchedWords;
