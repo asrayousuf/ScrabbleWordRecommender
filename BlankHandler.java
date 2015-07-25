@@ -60,7 +60,7 @@ class BlankHandler {
 			for(String words : currentValue)
 					currentEntryValue += (words + " ");
 			
-			scoreMap.put(possibleWordEntry.getKey(), currentEntryValue);
+			scoreMap.put(possibleWordEntry.getKey(), currentEntryValue.trim());
 		}
 		
 		return scoreMap;
