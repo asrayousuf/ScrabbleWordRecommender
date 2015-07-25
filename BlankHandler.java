@@ -74,15 +74,15 @@ class BlankHandler {
         	return new String(characters_in_rack);
 	}
     
-	private int countBlankTiles() {
+	public int countBlankTiles() {
 		return blankCount;		
 	}
 	
-	private boolean hasBlankTiles() {
+	public boolean hasBlankTiles() {
 		return blankCount > 0;
 	}
 	
-	private String getRackWithoutBlankTiles() {
+	public String getRackWithoutBlankTiles() {
 		return rackWithoutBlanks;
 	}
 }
