@@ -26,10 +26,10 @@ import java.util.*;
 
 	public static void main(String args[]) throws IOException {
 		ScrabbleWordSuggester scrabbleWordSuggester = new ScrabbleWordSuggester();
-		scrabbleWordSuggester.requestUserInput();		
+		scrabbleWordSuggester.requestUserInteraction();		
 	}
 
-	private void requestUserInput() {
+	public void requestUserInteraction() {
 		Scanner scanner = new Scanner(System.in);
 		do {
 			System.out.println("Enter Tiles: ");
@@ -105,7 +105,7 @@ import java.util.*;
 		}
 	}
 
-	public  int calculateScore(String word) {
+	private int calculateScore(String word) {
 		int value = 0;
 		for ( char c : word.toCharArray() ) {
 			value += SCORE_OF_LETTERS[c - CHARACTER_A];
@@ -113,7 +113,7 @@ import java.util.*;
 		return value;
 	}
 
-	HashMap<String, String> findPossibleWords(String rack, int blankCount) {
+	public HashMap<String, String> findPossibleWords(String rack, int blankCount) {
 		HashMap<String, String> possibleWords = new HashMap<String, String>();
 		for (Map.Entry<String, String> entry : dictionary.entrySet()) {
 			if ( wordMatches(entry.getKey(), rack, blankCount) ) {
@@ -123,21 +123,21 @@ import java.util.*;
 		return possibleWords;
 	}
 
-	boolean wordMatches(String word, String rack, int blankCount) {
+	private boolean wordMatches(String word, String rack, int blankCount) {
 		for (char c : rack.toCharArray()) {
 			word.remove(c);
 		}
 		return (word.size() == blankCount);
 	}
 
-	public HashMap<String, String> getSortedList() {
+	private HashMap<String, String> getSortedList() {
 		SortByScore sortObj= new SortByScore(dictionary);
 		HashMap<String,String> sorted_map = new HashMap <String,String>();
 		sorted_map.putAll(dictionary);
 		return sorted_map;
 	}
 
-	private void printSuggestions(HashMap<String, String> words) {
+	public void printSuggestions(HashMap<String, String> words) {
 		for ( Map.Entry<String, String> entry : words.entrySet() ) {
 			String score = entry.getValue().substring(0, entry.getValue().indexOf(" "));
 			String words = entry.getValue().substring(entry.getValue().indexOf(" ")).replace(" ", WORDS_SEPERATOR);
