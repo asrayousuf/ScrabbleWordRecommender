@@ -20,7 +20,7 @@ class BlankHandler {
 		this.rackWithoutBlanks = sortRack(this.rackWithoutBlanks);
 	}
 	
-	public HashMap<String , String> rankWordScores(Map<String, String> possibleWordsMap){
+	public HashMap<String , String> deductBlankTileScore(Map<String, String> possibleWordsMap){
 		
 		HashMap<String, String> scoreMap = new HashMap<String, String>();
 		Iterator <Map.Entry<String, String>> possibleWordsIterator = possibleWordsMap.entrySet().iterator();
