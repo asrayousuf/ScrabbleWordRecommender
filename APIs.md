@@ -28,6 +28,6 @@
 
 # ConstraintHandlerService.java
 
-	ConstraintHandlerService(String rack);
-	String appendConstraintLettersToRack(String constraintPattern);
-	List<String> applyPatternMatching(HashMap<String, String> possibleWords, String constraintPattern);
+	ConstraintHandlerService(String rack, String constraintPattern);
+	String appendConstraintLettersToRack();
+	List<String> applyPatternMatching(HashMap<String, String> possibleWords);
