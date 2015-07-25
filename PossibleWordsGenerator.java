@@ -15,7 +15,7 @@ public class PossibleWordsGenerator {
 		wordList = wordListBuilder.getWordList();
 	}
 	
-	public HashMap<String, String> findPossibleWordsWithConstraints(String rack,String constraint){
+	public HashMap<String, String> findValidWords(String rack,String constraint){
 		int blankTiles = 0;
 		if (constraint.length() > 0) {
 			ConstraintHandlerServiceImpl constraintHandler = new ConstraintHandlerServiceImpl(
