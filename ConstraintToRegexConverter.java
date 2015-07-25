@@ -11,12 +11,14 @@ public class ConstraintToRegexConverter
 	 public static String convertToRegex(String constraint)
 	 {
 	      StringBuilder regex = new StringBuilder("");
+		regex.append("^");
 	     for (int i = 0; i < constraint.length() ; i++)
 	     {
 	    	 if (constraint.charAt(i) == '.') regex.append('.');
 	    	 else if (constraint.charAt(i) == '*') regex.append("([a-zA-Z])*");
 	    	 else regex.append(constraint.charAt(i));
 	     }
+		regex.append("$");
 	       return regex.toString();
 	   }
 	 
