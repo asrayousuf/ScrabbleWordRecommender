@@ -1,3 +1,5 @@
+package ScrabbleTeam3;
+
 import java.util.HashMap;
 
 public interface ConstraintHandlerService {
