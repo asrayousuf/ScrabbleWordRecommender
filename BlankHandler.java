@@ -54,6 +54,7 @@ class BlankHandler {
 			}
 			
 			currentEntryValue = "";
+			currentValue[0] = String.valueOf(score);
 			
 			for(String words : currentValue)
 					currentEntryValue += (words + " ");
