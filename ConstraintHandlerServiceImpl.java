@@ -15,7 +15,7 @@ public class ConstraintHandlerServiceImpl implements ConstraintHandlerService {
 		this.tiles=tiles;
 	}
 	
-	public String appendConstraintLetters(String constraintPattern) {
+	public String appendConstraintLettersToRack(String constraintPattern) {
 		String lettersInConstraint = extractLetters(constraintPattern);
 		return tiles + lettersInConstraint;
 	}
@@ -23,30 +23,31 @@ public class ConstraintHandlerServiceImpl implements ConstraintHandlerService {
 
 	public HashMap<String, String> applyPatternMatching(HashMap<String, String> possibleWords, String constraintPattern) {
 		HashMap<String, String> patternMatchedWords = new HashMap<String, String> ();
-		String pattern= ConstraintToRegexConvert.convertToRegex(constraintPattern);
+		String pattern= ConstraintToRegexConverter.convertToRegex(constraintPattern);
 		
 		Set<String> wordKeys = possibleWords.keySet();
 		for (String key: wordKeys) {
 			
 			String[] wordList = (possibleWords.get(key)).split(" ");
-			String inputValue = wordList[0];
+			String inputValueScore = wordList[0];
+			String inputValue = "";
 			for(String wordToMatch: wordList)
 			{
 				if(ConstraintToRegexConverter.isMatching(wordToMatch, pattern)) {
-					inputValue += " " + wordToMatch;
+					inputValue += wordToMatch + " ";
 			}
-				patternMatchedWords.put(key, inputValue);
+				if(inputValue!="")
+				patternMatchedWords.put(key, inputValueScore+ " " + inputValue);
 			
 			}
 		}
 		return patternMatchedWords;
 }
-
-	private String extractLetters(String constraint) {
+		private String extractLetters(String constraint) {
 		String lettersInConstraint = EMPTY_STRING;
 
 		for (int index = 0; index < constraint.length(); index++) {
-			if (Character.isAlphabetic(constraint.charAt(index))) {
+			if (constraint.charAt(index) != '*') {
 				lettersInConstraint += constraint.charAt(index);
 			}
 		}
