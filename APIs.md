@@ -17,9 +17,9 @@
 	HashMap<String, String> getWordList();
 
 
-# BlankHandler.java
+# BlanksHandler.java
 
-	BlankHandler(String rack);
+	BlanksHandler(String rack);
 	HashMap<String, String> deductBlankTilesScore(Map<String, String> possibleWords);
 	int countBlankTiles();
 	boolean hasBlankTiles();
@@ -31,9 +31,3 @@
 	ConstraintHandlerService(String rack);
 	String appendConstraintLettersToRack(String constraintPattern);
 	List<String> applyPatternMatching(HashMap<String, String> possibleWords, String constraintPattern);
-
-
-# ConstraintToRegexConverter.java
-
-	String convertToRegex(String constraint);
-	boolean isMatching(String word, String regex);
