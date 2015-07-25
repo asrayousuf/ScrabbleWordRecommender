@@ -64,7 +64,7 @@ import java.util.*;
 				possibleWords = blankHandler.rankWordScores();
 			}
 
-			printSuggestions(possibleWords);
+			printSuggestedWords(possibleWords);
 
 			System.out.println("Do you wish to search for another word? (y/n) ");
 			boolean nextSequence = false;
@@ -137,7 +137,7 @@ import java.util.*;
 		return sorted_map;
 	}
 
-	public void printSuggestions(HashMap<String, String> words) {
+	public void printSuggestedWords(HashMap<String, String> words) {
 		for ( Map.Entry<String, String> entry : words.entrySet() ) {
 			String score = entry.getValue().substring(0, entry.getValue().indexOf(" "));
 			String words = entry.getValue().substring(entry.getValue().indexOf(" ")).replace(" ", WORDS_SEPERATOR);
