@@ -8,19 +8,19 @@ import java.util.Arrays;
 
 class BlankHandler {
 	
-	private static final String BLANK_TILE = "*";
+	private static final char BLANK_TILE = '*';
 	private String rackWithoutBlanks;
 	private int blankCount;
 	static final int SCORE_OF_LETTERS[] = {1, 3, 3, 2, 1, 4, 2, 4, 1, 8, 5, 1, 3, 1, 1, 3, 10, 1, 1, 1, 1, 4, 4, 8, 4, 10};
 	static final int A_ASCII = 97;
 	
 	public BlankHandler(String rack) {
-		this.blankCount = rack.length() - rack.replace(BLANK_TILE, "").length();
-		this.rackWithoutBlanks = rack_with_blanks.replace(BLANK_TILE, "");
+		this.blankCount = rack.length() - rack.replace(BLANK_TILE+"", "").length();
+		this.rackWithoutBlanks = rack.replace(BLANK_TILE+"", "");
 		this.rackWithoutBlanks = sortRack(this.rackWithoutBlanks);
 	}
 	
-	public static HashMap<String , String> rankWordScores(Map<String, String> possibleWordsMap){
+	public HashMap<String , String> rankWordScores(Map<String, String> possibleWordsMap){
 		
 		HashMap<String, String> scoreMap = new HashMap<String, String>();
 		Iterator <Map.Entry<String, String>> possibleWordsIterator = possibleWordsMap.entrySet().iterator();
@@ -49,7 +49,7 @@ class BlankHandler {
 			}
 			
 			for( char letter : currentKey ){
-				if(letter != '*')
+				if(letter != BLANK_TILE)
 					score -= SCORE_OF_LETTERS[ letter - A_ASCII ];
 			}
 			
