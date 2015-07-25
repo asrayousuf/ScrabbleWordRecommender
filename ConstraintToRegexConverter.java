@@ -14,7 +14,7 @@ public class ConstraintToRegexConverter
 	     for (int i = 0; i < constraint.length() ; i++)
 	     {
 	    	 if (constraint.charAt(i) == '.') regex.append('.');
-	    	 else if (constraint.charAt(i) == '*') regex.append("([a-z])*");
+	    	 else if (constraint.charAt(i) == '*') regex.append("([a-zA-Z])*");
 	    	 else regex.append(constraint.charAt(i));
 	     }
 	       return regex.toString();
