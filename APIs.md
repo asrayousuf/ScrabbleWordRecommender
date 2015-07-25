@@ -1,6 +1,6 @@
-# WordSuggester.java
+# ScrabbleWordSuggester.java
 
-	WordSuggester(PossibleWordsGenerator possibleWordsGenerator);
+	ScrabbleWordSuggester(PossibleWordsGenerator possibleWordsGenerator);
 	void requestUserInteraction();
 	void printSuggestedWords(TreeMap<String, String> words);
 
