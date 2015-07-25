@@ -20,9 +20,9 @@ class BlankHandler {
 		this.rackWithoutBlanks = sortRack(this.rackWithoutBlanks);
 	}
 	
-		public static SortedMap<String , String> rankWordScores(Map<String, String> possibleWordsMap){
+	public static HashMap<String , String> rankWordScores(Map<String, String> possibleWordsMap){
 		
-		SortedMap<String, String> scoreMap = new TreeMap<String, String>(Collections.reverseOrder());
+		HashMap<String, String> scoreMap = new HashMap<String, String>();
 		Iterator <Map.Entry<String, String>> possibleWordsIterator = possibleWordsMap.entrySet().iterator();
 		String currentEntryValue = "";
 		char[] currentKey;
