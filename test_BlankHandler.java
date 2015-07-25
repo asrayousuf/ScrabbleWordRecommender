@@ -6,7 +6,7 @@ import org.junit.Test;
 
 public class test_BlankHandler {
 
-	String rack = "ab*";	
+	String rack = "AB*";	
 	BlankHandler messageUtil = new BlankHandler(rack);
 	
 	@Test
@@ -21,20 +21,20 @@ public class test_BlankHandler {
 	
 	@Test
 	public void testGetRackWithoutBlanks() {
-		assertEquals("ab", BlankHandler.getRackWithoutBlankTiles());
+		assertEquals("AB", BlankHandler.getRackWithoutBlankTiles());
 	}
 	
 	@Test
 	public void testRankWordScores() {
 		HashMap<String, String> input_map = new HashMap<String, String>();
-		input_map.put("aab", "20 aab aba baa");
-		input_map.put("abc", "23 abc acb bac bca cab cba");
-		input_map.put("ab", "12 ab ba");
+		input_map.put("AAB", "20 AAB ABA BAA");
+		input_map.put("ABC", "23 ABC ACB BAC BCA CAB CBA");
+		input_map.put("AB", "12 AB BA");
 		
 		HashMap<String, String> expected_output = new HashMap<String, String>();
-		expected_output.put("aab", "19 aab aba baa");
-		expected_output.put("abc", "20 abc acb bac bca cab cba");
-		expected_output.put("ab", "12 ab ba");
+		expected_output.put("AAB", "19 AAB ABA BAA");
+		expected_output.put("ABC", "20 ABC ACB BAC BCA CAB CBA");
+		expected_output.put("AB", "12 AB BA");
 		
 		HashMap<String, String> actual_output = BlankHandler.deductBlankTileScore(input_map);
 		assertEquals(expected_output, actual_output);
