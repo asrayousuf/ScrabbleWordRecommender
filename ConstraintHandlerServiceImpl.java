@@ -23,7 +23,7 @@ public class ConstraintHandlerServiceImpl implements ConstraintHandlerService {
 
 	public HashMap<String, String> applyPatternMatching(HashMap<String, String> possibleWords, String constraintPattern) {
 		HashMap<String, String> patternMatchedWords = new HashMap<String, String> ();
-		String pattern= ConstraintToRegexConvert.convertToRegex(constraintPattern);
+		String pattern= ConstraintToRegexConverter.convertToRegex(constraintPattern);
 		
 		Set<String> wordKeys = possibleWords.keySet();
 		for (String key: wordKeys) {
