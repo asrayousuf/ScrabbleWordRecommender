@@ -33,7 +33,7 @@ public class ScrabbleWordSuggester {
 			int required_suggestions = Integer.parseInt(scanner.nextLine());
 			
 			HashMap<String, String> possibleWords = possibleWordsGenerator
-					.findPossibleWordsWithConstraints(rack, constraint);
+					.findPossibleWordsWithConstraints(rack);
 			
 			printSuggestedWords(sortDescending(possibleWords), required_suggestions);
 

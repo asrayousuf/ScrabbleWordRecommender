@@ -10,40 +10,40 @@ public class ConstraintHandlerServiceImpl implements ConstraintHandlerService {
 	private final String EMPTY_STRING = "";
 	
 	private String tiles;
+	private String constraint;
 	
-	public ConstraintHandlerServiceImpl(String tiles) {
+	public ConstraintHandlerServiceImpl(String tiles, String constraint) {
 		this.tiles=tiles;
+		this.constraint = constraint;
 	}
 	
-	public String appendConstraintLettersToRack(String constraintPattern) {
-		String lettersInConstraint = extractLetters(constraintPattern);
+	public String appendConstraintLettersToRack() {
+		String lettersInConstraint = extractLetters(constraint);
 		return tiles + lettersInConstraint;
 	}
 
 
-	public HashMap<String, String> applyPatternMatching(HashMap<String, String> possibleWords, String constraintPattern) {
+	public HashMap<String, String> applyPatternMatching(HashMap<String, String> possibleWords) {
 		HashMap<String, String> patternMatchedWords = new HashMap<String, String> ();
-		String pattern= ConstraintToRegexConverter.convertToRegex(constraintPattern);
+		String pattern = ConstraintToRegexConverter.convertToRegex(constraint);
 		
 		Set<String> wordKeys = possibleWords.keySet();
 		for (String key: wordKeys) {
-			
 			String[] wordList = (possibleWords.get(key)).split(" ");
 			String inputValueScore = wordList[0];
 			String inputValue = "";
-			for(String wordToMatch: wordList)
-			{
+			for(String wordToMatch: wordList) {
 				if(ConstraintToRegexConverter.isMatching(wordToMatch, pattern)) {
 					inputValue += wordToMatch + " ";
-			}
+				}
 				if(inputValue!="")
-				patternMatchedWords.put(key, inputValueScore+ " " + inputValue);
-			
+					patternMatchedWords.put(key, inputValueScore+ " " + inputValue);
 			}
 		}
 		return patternMatchedWords;
-}
-		private String extractLetters(String constraint) {
+	}
+
+	private String extractLetters(String constraint) {
 		String lettersInConstraint = EMPTY_STRING;
 
 		for (int index = 0; index < constraint.length(); index++) {

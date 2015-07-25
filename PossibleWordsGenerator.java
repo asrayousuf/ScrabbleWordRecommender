@@ -19,8 +19,8 @@ public class PossibleWordsGenerator {
 		int blankTiles = 0;
 		if (constraint.length() > 0) {
 			ConstraintHandlerServiceImpl constraintHandler = new ConstraintHandlerServiceImpl(
-					rack);
-			rack = constraintHandler.appendConstraintLettersToRack(constraint);
+					rack, constraint);
+			rack = constraintHandler.appendConstraintLettersToRack();
 		}
 		
 		BlankHandler blankHandler = new BlankHandler(rack);
@@ -34,7 +34,7 @@ public class PossibleWordsGenerator {
 			ConstraintHandlerServiceImpl constraintHandler = new ConstraintHandlerServiceImpl(
 					rack);
 			possibleWords = constraintHandler.applyPatternMatching(
-					possibleWords, constraint);
+					possibleWords);
 		}
 
 		if (blankHandler.hasBlankTiles()) {
