@@ -29,13 +29,15 @@ public class ConstraintHandlerServiceImpl implements ConstraintHandlerService {
 		for (String key: wordKeys) {
 			
 			String[] wordList = (possibleWords.get(key)).split(" ");
-			String inputValue = wordList[0];
+			String inputValueScore = wordList[0];
+			String inputValue = "";
 			for(String wordToMatch: wordList)
 			{
 				if(ConstraintToRegexConverter.isMatching(wordToMatch, pattern)) {
-					inputValue += " " + wordToMatch;
+					inputValue += wordToMatch + " ";
 			}
-				patternMatchedWords.put(key, inputValue);
+				if(inputValue!="")
+				patternMatchedWords.put(key, inputValueScore+ " " + inputValue);
 			
 			}
 		}
