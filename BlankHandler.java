@@ -13,7 +13,7 @@ class BlankHandler {
 	private String rackWithoutBlanks;
 	private int blankCount;
 	static final int SCORE_OF_LETTERS[] = {1, 3, 3, 2, 1, 4, 2, 4, 1, 8, 5, 1, 3, 1, 1, 3, 10, 1, 1, 1, 1, 4, 4, 8, 4, 10};
-	static final int A_ASCII = 97;
+	static final char CHARACTER_A = 'A';
 	
 	public BlankHandler(String rack) {
 		this.blankCount = rack.length() - rack.replace(BLANK_TILE+"", "").length();
@@ -51,7 +51,7 @@ class BlankHandler {
 			
 			for( char letter : currentKey ){
 				if(letter != BLANK_TILE)
-					score -= SCORE_OF_LETTERS[ letter - A_ASCII ];
+					score -= SCORE_OF_LETTERS[ letter - CHARACTER_A ];
 			}
 			
 			currentEntryValue = "";
